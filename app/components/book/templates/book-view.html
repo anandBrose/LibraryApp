@@ -1,0 +1,13 @@
+<div class="book-view">
+    <md-progress-linear md-mode="indeterminate" ng-if="bookCtrl.showProgress"></md-progress-linear>
+    <div ng-if="bookViewCtrl.book" layout="row">
+        <img src="img/bookcover.png">
+        <div flex class="book-detail">
+            <h1 class="book-title">{{bookViewCtrl.book.title}}</h1>
+            <label class="author">by {{bookViewCtrl.book.author}}</label>
+            <br>
+            <b>{{bookViewCtrl.book.categories}}</b>
+            <p>Lorem ipsum dolor sit amet, an vel electram consetetur, rebum impetus volutpat et nam, eius latine pro cu. Etiam paulo maluisset eum et. Ne qui doming iuvaret impedit, soluta officiis recusabo usu et. Essent omittam pro at. Usu appareat scriptorem dissentiet ea, ei fierent splendide constituto qui. Ex utroque impedit sit, quem probo theophrastus qui in, duo id iriure liberavisse. Te saperet impedit vix, ea est diam laboramus similique.</p>
+        </div>
+    </div>
+</div>
