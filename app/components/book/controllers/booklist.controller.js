@@ -1,10 +1,20 @@
 angular.module('book').controller('bookListController', function($scope, Book, $timeout, $mdDialog) {
     var bookCtrl = this;
     bookCtrl.deleteAll = function(ev) {
-        $scope.globals.showProgressLoader();
-        Book.delete_all({ action: 'clean' }, function(entries) {
-            $scope.globals.hideProgressLoader();
-        }, $scope.globals.hideProgressLoader);
+
+        var confirm = $mdDialog.confirm()
+            .title('Would you like to delete all books data completely?')
+            .textContent('This cannot be undone!')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('No');
+
+        $mdDialog.show(confirm).then(function() {
+            $scope.globals.showProgressLoader();
+            Book.delete_all({ action: 'clean' }, function(entries) {
+                $scope.globals.hideProgressLoader();
+            }, $scope.globals.hideProgressLoader);
+        }, function() {});
     }
 
     bookCtrl.addBook = function(ev) {
@@ -37,7 +47,7 @@ angular.module('book').controller('bookListController', function($scope, Book, $
         Book.query(function(entries) {
             bookCtrl.books = entries;
             $scope.globals.hideProgressLoader();
-        }, function(error){
+        }, function(error) {
             $scope.globals.hideProgressLoader();
         });
     }

@@ -46,3 +46,29 @@ describe('Testing BookAddController', function() {
         expect(dialogData.book.$save).toHaveBeenCalled();
     })
 })
+
+describe('Testing BookListController', function() {
+    var scope, mdDialog, Book, controller;
+    beforeEach(module('book'))
+    beforeEach(module('libraryApp'))
+
+    beforeEach(inject(function($rootScope, $controller) {
+        scope = $rootScope.$new();
+        mdDialog = MdDialogMock();
+        route = { current: { params: {} } };
+        controller = $controller('bookListController', {
+            $scope: scope,
+            Book: Book = BookMock(),
+            $mdDialog: mdDialog
+        })
+    }))
+
+    it('load book list', function() {
+        controller.loadContent();
+        expect(Book.query).toHaveBeenCalled();
+    })
+    it('Should show delete all dialog', function() {
+        controller.deleteAll();
+        expect(mdDialog.show).toHaveBeenCalled();
+    })
+})
