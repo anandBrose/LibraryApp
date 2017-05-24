@@ -1,0 +1,47 @@
+<md-dialog class="book-dialog">
+    <form name="bookForm" ng-submit="submitBook(bookForm)">
+        <h3>Add new book</h3>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Book Title</label>
+            <input md-maxlength="30" md-minlength="3" required md-no-asterisk name="title" ng-model="book.title">
+            <div ng-messages="bookForm.title.$error">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="md-maxlength">The title must be less than 30 characters long.</div>
+                <div ng-message="md-minlength">The title must be atleast 4 characters long.</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Author</label>
+            <input md-maxlength="30" required md-no-asterisk name="author" ng-model="book.author">
+            <div ng-messages="bookForm.author.$error">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="md-maxlength">The author must be less than 30 characters long.</div>
+                <div ng-message="md-minlength">The author must be atleast 4 characters long.</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Category</label>
+            <md-select ng-model="book.categories">
+                <md-option ng-repeat="category in categories" value="{{category}}">
+                    {{category}}
+                </md-option>
+            </md-select>
+            <div ng-messages="bookForm.description.$error">
+                <div ng-message="required">This is required.</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Publisher</label>
+            <input md-maxlength="30" required md-no-asterisk name="publisher" ng-model="book.publisher">
+            <div ng-messages="bookForm.publisher.$error">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="md-maxlength">The publisher must be less than 30 characters long.</div>
+                <div ng-message="md-minlength">The publisher must be atleast 4 characters long.</div>
+            </div>
+        </md-input-container>
+        <div class="button-wrapper">
+            <md-button type="button" ng-click="hide()">Cancel</md-button>
+            <md-button type="submit">Submit</md-button>
+        </div>
+    </form>
+</md-dialog>

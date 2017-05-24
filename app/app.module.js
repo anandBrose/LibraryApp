@@ -8,7 +8,7 @@ angular.module('libraryApp', ['ngMaterial', 'ngAnimate','ngRoute', 'ngResource',
             controllerAs: 'bookCtrl'
         })
         .when('/book/:id', {
-            templateUrl: 'components/book/templates/book-view.html',
+            templateUrl: 'components/book/templates/book-view-page.html',
             controller: 'bookViewController',
             controllerAs: 'bookViewCtrl'
         });

@@ -5,4 +5,13 @@ md-input-container {
     }
 }
 
+a {
+    text-decoration: none;
+}
+
+.title {
+    font-size: 1.5em;
+    font-weight: lighter;
+}
+
 @import 'book';

@@ -1,23 +1,9 @@
 .book-landing {
-    .header {
-        padding: 1em 2em;
-        .title {
-            font-size: 2em;
-            font-weight: lighter;
-        }
-        .search-input {
-            float: right;
-            border: none;
-            background-color: #aaa;
-            padding: 1em;
-            border-radius: 4px;
-        }
-    }
+    padding: 1em;
     .md-container {
         height: 2px;
     }
     .book-list {
-        padding: 2em;
         margin-top: 3em;
         .book-item {
             display: inline-block;
@@ -50,15 +36,45 @@
         width: 10em;
         height: 15em;
         border-radius: 5px;
-        transition: box-shadow 0.2s ease;
+        margin-right: 1em;
+        margin-bottom: 1em;
     }
     .book-detail {
-        padding-left: 1em;
+        position: relative;
+    }
+    .back-nav {
+        margin-bottom: 1em;
+    }
+    .delete {
+        background-color: #e21212;
+        position: absolute;
+        top: 0;
+        right: 0;
     }
     .book-title {
         margin: 0;
     }
+    .publisher {
+        color: purple;
+        font-weight: lighter;
+        font-style: italic;
+    }
     p {
         font-size: 0.8em;
+        font-style: italic;
+    }
+}
+
+.book-dialog {
+    form {
+        width: 500px;
+        max-width: calc(100vw - 4em);
+        padding: 1em 2em;
+    }
+    .button-wrapper {
+        text-align: right;
+    }
+    md-input-container {
+        margin: 1em;
     }
 }

@@ -1,8 +1,8 @@
 <div class="book-landing">
-    <md-progress-linear md-mode="indeterminate" ng-if="bookCtrl.showProgress"></md-progress-linear>
     <md-content>
+        <md-button class="md-primary back-nav" ng-click="bookCtrl.addBook()">Add New</md-button>
         <div class="book-list">
-            <a class="book-item" ng-href="./#!{{book.url}}" ng-repeat="book in bookCtrl.books" ng-mouseenter="onHover = 'md-whiteframe-5dp'" ng-mouseleave="onHover = 'md-whiteframe-1dp'">
+            <a class="book-item" ng-href="./#!{{book.url}}" ng-repeat="book in bookCtrl.books" ng-mouseenter="onHover = 'md-whiteframe-8dp'" ng-init="onHover = 'md-whiteframe-1dp'" ng-mouseleave="onHover = 'md-whiteframe-1dp'">
                 <img src="img/bookcover.png" ng-class="onHover">
                 <h1 class="book-title">{{book.title}}</h1>
                 <label class="author">by {{book.author}}</label>
