@@ -16,6 +16,11 @@ angular.module('book').factory('Book', function($resource, $mdToast) {
         	method: 'GET',
             interceptor: { responseError: resourceErrorHandler }
         },
+        query: {
+            method: 'GET',
+            isArray: true,
+            interceptor: { responseError: resourceErrorHandler }
+        },
         save: {
         	method: 'POST',
             interceptor: { responseError: resourceErrorHandler }

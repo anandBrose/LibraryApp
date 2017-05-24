@@ -37,7 +37,9 @@ angular.module('book').controller('bookListController', function($scope, Book, $
         Book.query(function(entries) {
             bookCtrl.books = entries;
             $scope.globals.hideProgressLoader();
-        }, $scope.globals.hideProgressLoader);
+        }, function(error){
+            $scope.globals.hideProgressLoader();
+        });
     }
     $scope.$on('$viewContentLoaded', function readyToTrick() {
         bookCtrl.loadContent();

@@ -1,8 +1,7 @@
 {
-  "name": "Quick-setup",
-  "description": "Basic Gulp niceties for rapidly building stuff",
+  "name": "Library app",
   "version": "0.0.2",
-  "author": "Ben Frain",
+  "author": "Anandraj",
   "private": true,
   "devDependencies": {
     "angular-mocks": "^1.6.4",

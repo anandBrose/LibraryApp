@@ -66,3 +66,4 @@ gulp.task('watch', ['browserSync', 'sass'], function() {
 
 
 gulp.task('default', ['clean', 'sass', 'vendor', 'html', 'js', 'img', 'watch']);
+gulp.task('dev', ['clean', 'sass', 'vendor', 'html', 'js', 'img']);

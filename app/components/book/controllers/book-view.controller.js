@@ -1,4 +1,4 @@
-angular.module('book').controller('bookViewController', function($scope, Book, $timeout, $route, $mdDialog,$location) {
+angular.module('book').controller('bookViewController', function($scope, Book, $timeout, $route, $mdDialog, $location, $mdToast) {
     var bookViewCtrl = this;
     bookViewCtrl.showConfirm = function(ev, book) {
         // Appending dialog to document.body to cover sidenav in docs app
@@ -44,9 +44,18 @@ angular.module('book').controller('bookViewController', function($scope, Book, $
     };
     bookViewCtrl.loadContent = function() {
         $scope.globals.showProgressLoader();
-        Book.get({ id: $route.current.params.id }, function(book) {
-            bookViewCtrl.book = book;
+        Book.get({ id: $route.current.params.id }, function(resp) {
             $scope.globals.hideProgressLoader();
+            if (resp.error) {
+                $mdToast.show(
+                    $mdToast.simple()
+                    .position('top left')
+                    .textContent('Ooops! Book not found')
+                    .hideDelay(3000)
+                );
+                return;
+            }
+            bookViewCtrl.book = resp;
         }, $scope.globals.hideProgressLoader);
     }
     $scope.$on('$viewContentLoaded', function readyToTrick() {
