@@ -1,7 +1,8 @@
 <div class="book-landing">
     <md-content>
-        <md-button class="md-primary back-nav" ng-click="bookCtrl.addBook()">Add New</md-button>
-        <div class="book-list">
+        <md-button class="md-primary back-nav md-raised" ng-click="bookCtrl.addBook()">Add New</md-button>
+        <md-button class="md-primary back-nav md-raised md-warn" ng-click="bookCtrl.deleteAll()">Clean All</md-button>
+        <div class="book-list animate-if" ng-if="bookCtrl.books.length">
             <a class="book-item" ng-href="./#!{{book.url}}" ng-repeat="book in bookCtrl.books" ng-mouseenter="onHover = 'md-whiteframe-8dp'" ng-init="onHover = 'md-whiteframe-1dp'" ng-mouseleave="onHover = 'md-whiteframe-1dp'">
                 <img src="img/bookcover.png" ng-class="onHover">
                 <h1 class="book-title">{{book.title}}</h1>

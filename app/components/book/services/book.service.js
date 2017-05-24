@@ -1,13 +1,33 @@
-angular.module('book').factory('Book', function($resource) {
-    return $resource('https://interview-api-staging.bytemark.co/books/:id', { id: '@_id' }, {
+angular.module('book').factory('Book', function($resource, $mdToast) {
+    function resourceErrorHandler() {
+        $mdToast.show(
+            $mdToast.simple()
+            .position('top left')
+            .textContent('Ooops! Remote server failed to serve your request')
+            .hideDelay(3000)
+        );
+    }
+    return $resource('https://interview-api-staging.bytemark.co/:action/:id', { action: 'books', id: '@_id' }, {
         update_book: {
-            method: 'PUT'
+            method: 'PUT',
+            interceptor: { responseError: resourceErrorHandler }
         },
-        delete_book: {
+        get: {
+        	method: 'GET',
+            interceptor: { responseError: resourceErrorHandler }
+        },
+        save: {
+        	method: 'POST',
+            interceptor: { responseError: resourceErrorHandler }
+        },
+        delete: {
+        	method: 'DELETE',
+            interceptor: { responseError: resourceErrorHandler }
+        },
+        delete_all: {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'text/plain'
-            }
+            action: 'clean',
+            interceptor: { responseError: resourceErrorHandler }
         }
     });
 

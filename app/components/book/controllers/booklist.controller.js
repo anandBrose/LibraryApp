@@ -1,14 +1,12 @@
 angular.module('book').controller('bookListController', function($scope, Book, $timeout, $mdDialog) {
     var bookCtrl = this;
+    bookCtrl.deleteAll = function(ev) {
+        $scope.globals.showProgressLoader();
+        Book.delete_all({ action: 'clean' }, function(entries) {
+            $scope.globals.hideProgressLoader();
+        }, $scope.globals.hideProgressLoader);
+    }
 
-    bookCtrl.showProgress = function() {
-        $scope.$root.showProgress = true;
-    }
-    bookCtrl.hideProgress = function() {
-        $timeout(function() {
-            $scope.$root.showProgress = false;
-        }, 500)
-    }
     bookCtrl.addBook = function(ev) {
         $mdDialog.show({
                 controller: 'bookAddController',
@@ -18,7 +16,11 @@ angular.module('book').controller('bookListController', function($scope, Book, $
                 locals: {
                     dialogData: {
                         book: new Book(),
-                        mode: "add"
+                        mode: "add",
+                        globals: $scope.globals,
+                        callback: function() {
+                            bookViewCtrl.loadContent();
+                        }
                     }
                 },
                 clickOutsideToClose: true,
@@ -30,11 +32,14 @@ angular.module('book').controller('bookListController', function($scope, Book, $
                 $scope.status = 'You cancelled the dialog.';
             });
     };
-    $scope.$on('$viewContentLoaded', function readyToTrick() {
-        bookCtrl.showProgress();
+    bookCtrl.loadContent = function() {
+        $scope.globals.showProgressLoader();
         Book.query(function(entries) {
             bookCtrl.books = entries;
-            bookCtrl.hideProgress();
-        });
+            $scope.globals.hideProgressLoader();
+        }, $scope.globals.hideProgressLoader);
+    }
+    $scope.$on('$viewContentLoaded', function readyToTrick() {
+        bookCtrl.loadContent();
     });
 });

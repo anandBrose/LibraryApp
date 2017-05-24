@@ -1,14 +1,5 @@
-angular.module('book').controller('bookViewController', function($scope, Book, $timeout, $route, $mdDialog) {
+angular.module('book').controller('bookViewController', function($scope, Book, $timeout, $route, $mdDialog,$location) {
     var bookViewCtrl = this;
-
-    bookViewCtrl.showProgress = function() {
-        $scope.$root.showProgress = true;
-    }
-    bookViewCtrl.hideProgress = function() {
-        $timeout(function() {
-            $scope.$root.showProgress = false;
-        }, 500)
-    }
     bookViewCtrl.showConfirm = function(ev, book) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
@@ -19,7 +10,11 @@ angular.module('book').controller('bookViewController', function($scope, Book, $
             .cancel('no');
 
         $mdDialog.show(confirm).then(function() {
-            book.$delete_book({ id: $route.current.params.id });
+            $scope.globals.showProgressLoader();
+            book.$delete({ id: $route.current.params.id }, function() {
+                $scope.globals.hideProgressLoader();
+                $location.path("/");
+            }, $scope.globals.hideProgressLoader);
         }, function() {});
     };
     bookViewCtrl.updateBook = function(ev, book) {
@@ -30,7 +25,11 @@ angular.module('book').controller('bookViewController', function($scope, Book, $
                 locals: {
                     dialogData: {
                         book: angular.copy(book),
-                        mode: "update"
+                        mode: "update",
+                        globals: $scope.globals,
+                        callback: function() {
+                            bookViewCtrl.loadContent();
+                        }
                     }
                 },
                 targetEvent: ev,
@@ -43,12 +42,14 @@ angular.module('book').controller('bookViewController', function($scope, Book, $
                 $scope.status = 'You cancelled the dialog.';
             });
     };
-    $scope.$on('$viewContentLoaded', function readyToTrick() {
-        bookViewCtrl.showProgress();
+    bookViewCtrl.loadContent = function() {
+        $scope.globals.showProgressLoader();
         Book.get({ id: $route.current.params.id }, function(book) {
             bookViewCtrl.book = book;
-            // bookViewCtrl.book.categories; = bookViewCtrl.book.categories.toString(0);
-            bookViewCtrl.hideProgress();
-        });
+            $scope.globals.hideProgressLoader();
+        }, $scope.globals.hideProgressLoader);
+    }
+    $scope.$on('$viewContentLoaded', function readyToTrick() {
+        bookViewCtrl.loadContent();
     });
 });
