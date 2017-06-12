@@ -7,7 +7,7 @@ angular.module('book').factory('Book', function($resource, $mdToast) {
             .hideDelay(3000)
         );
     }
-    return $resource('https://interview-api-staging.bytemark.co/:action/:id', { action: 'books', id: '@_id' }, {
+    return $resource('https://host.com/:action/:id', { action: 'books', id: '@_id' }, {
         update_book: {
             method: 'PUT',
             interceptor: { responseError: resourceErrorHandler }
