@@ -12,7 +12,8 @@ For Dev:
 4. karma start
 
 
-<b>Sample JSON structure hosted in Firebase<b>
+<b>Sample JSON structure hosted in Firebase</b>
+```
 {
   "-Kn42No38w68GeKuS9r4" : {
     "author" : "Mark Levy",
@@ -35,5 +36,5 @@ For Dev:
     "title" : "Some book"
   }
 }
-
+```
 
