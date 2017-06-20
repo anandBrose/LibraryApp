@@ -3,8 +3,8 @@
         <md-button class="md-primary back-nav md-raised" ng-click="bookCtrl.addBook()">Add New</md-button>
         <md-button class="md-primary back-nav md-raised md-warn" ng-click="bookCtrl.deleteAll()">Clean All</md-button>
         <div class="book-list animate-if" ng-if="bookCtrl.books.length">
-            <a class="book-item" ng-href="./#!{{book.url}}" ng-repeat="book in bookCtrl.books" ng-mouseenter="onHover = 'md-whiteframe-8dp'" ng-init="onHover = 'md-whiteframe-1dp'" ng-mouseleave="onHover = 'md-whiteframe-1dp'">
-                <img src="img/bookcover.png" ng-class="onHover">
+            <a class="book-item" ng-href="./#!/book/{{book.id}}" ng-repeat="book in bookCtrl.books track by $index" ng-mouseenter="onHover = 'md-whiteframe-8dp'" ng-init="onHover = 'md-whiteframe-1dp'" ng-mouseleave="onHover = 'md-whiteframe-1dp'">
+                <img ng-src="{{book.imgUrl}}" ng-class="onHover">
                 <h1 class="book-title">{{book.title}}</h1>
                 <label class="author">by {{book.author}}</label>
             </a>

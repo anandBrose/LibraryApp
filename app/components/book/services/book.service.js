@@ -7,7 +7,7 @@ angular.module('book').factory('Book', function($resource, $mdToast) {
             .hideDelay(3000)
         );
     }
-    return $resource('https://host.com/:action/:id', { action: 'books', id: '@_id' }, {
+    return $resource('https://library-app-cad44.firebaseio.com/book/:id.json', { id: '@_id' }, {
         update_book: {
             method: 'PUT',
             interceptor: { responseError: resourceErrorHandler }
@@ -18,7 +18,6 @@ angular.module('book').factory('Book', function($resource, $mdToast) {
         },
         query: {
             method: 'GET',
-            isArray: true,
             interceptor: { responseError: resourceErrorHandler }
         },
         save: {

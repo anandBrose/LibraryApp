@@ -29,7 +29,7 @@ angular.module('book').controller('bookListController', function($scope, Book, $
                         mode: "add",
                         globals: $scope.globals,
                         callback: function() {
-                            bookViewCtrl.loadContent();
+                            bookCtrl.loadContent();
                         }
                     }
                 },
@@ -45,7 +45,13 @@ angular.module('book').controller('bookListController', function($scope, Book, $
     bookCtrl.loadContent = function() {
         $scope.globals.showProgressLoader();
         Book.query(function(entries) {
-            bookCtrl.books = entries;
+            bookCtrl.books = [];
+            for(var item in entries){
+                if(entries[item].title){
+                    entries[item].id = item;
+                    bookCtrl.books.push(entries[item]);
+                }
+            }
             $scope.globals.hideProgressLoader();
         }, function(error) {
             $scope.globals.hideProgressLoader();

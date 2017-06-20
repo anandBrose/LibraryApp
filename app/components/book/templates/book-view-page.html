@@ -1,7 +1,7 @@
 <div class="book-view">
     <md-button class="md-primary back-nav" ng-href="/">Back to list</md-button>
     <div ng-if="bookViewCtrl.book" class="animate-if" layout="row" layout-xs="column">
-        <img src="img/bookcover.png" class="md-whiteframe-1dp">
+        <img ng-src="{{bookViewCtrl.book.imgUrl}}" class="md-whiteframe-1dp">
         <div flex class="book-detail">
             <h1 class="book-title">{{bookViewCtrl.book.title}}</h1>
             <label class="author">by {{bookViewCtrl.book.author}}</label>
